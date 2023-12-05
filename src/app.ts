@@ -1,10 +1,14 @@
 import express from 'express';
+import cors from 'cors';
 import userRoutes from './routes/userRoutes';
 import postRoutes from './routes/postRoutes';
-import { setupSwagger } from './swagger'; 
+import { setupSwagger } from './swagger';
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
+
+// Use CORS middleware
+app.use(cors());
 
 app.use(express.json());
 

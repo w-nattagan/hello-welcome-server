@@ -1,14 +1,20 @@
-FROM node:14
+# Use an official Node.js runtime as a parent image
+FROM node:16
 
-WORKDIR /app
+# Set the working directory in the container
+WORKDIR /usr/src/app
 
+# Copy package.json and yarn.lock to the working directory
 COPY package*.json ./
 
-# Use Yarn for installing dependencies
+# Install application dependencies
 RUN yarn install
 
+# Copy the application code to the working directory
 COPY . .
 
-EXPOSE 3000
+# Expose the port the app runs on
+EXPOSE 8080
 
+# Define the command to run your application
 CMD ["yarn", "start"]

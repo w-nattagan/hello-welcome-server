@@ -32,7 +32,7 @@ async function createUser(data: UserInput): Promise<UserType> {
       username: data.username,
       email: data.email,
       phone: data.phone,
-      website: data.website,
+      website: data.website ?? "",
       password: data.password ?? "",
       // Add the entire address data if available
       address: data.address

@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: hello-welcome-server
-          image: your-docker-image
+          image: hello-welcome-server-image
           ports:
             - containerPort: 3000
