@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-welcome-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-welcome-server
+  template:
+    metadata:
+      labels:
+        app: yhello-welcome-server
+    spec:
+      containers:
+        - name: hello-welcome-server
+          image: your-docker-image
+          ports:
+            - containerPort: 3000
