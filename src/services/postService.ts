@@ -57,8 +57,14 @@ async function deletePost(id: number): Promise<PostType | null> {
 }
 
 // Get all posts
-async function getAllPosts(): Promise<PostType[]> {
-  const posts = await prisma.post.findMany();
+async function getAllPosts(page: number = 1, limit: number = 20): Promise<PostType[]> {
+  const offset = (page - 1) * limit;
+
+  const posts = await prisma.post.findMany({
+    take: limit,
+    skip: offset,
+  });
+
   return posts.map(p => formatPost(p as PostType));
 }
 

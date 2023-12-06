@@ -80,11 +80,15 @@ export async function deletePost(req: Request, res: Response) {
 // Get all posts
 export async function getAllPosts(req: Request, res: Response) {
   try {
-    const posts = await postService.getAllPosts();
+    const { page = '1', limit = '20' } = req.query;
+    const pageNumber = typeof page === 'string' ? parseInt(page, 10) : 1;
+    const limitNumber = typeof limit === 'string' ? parseInt(limit, 10) : 20;
+
+    const posts = await postService.getAllPosts(pageNumber, limitNumber);
     return res.status(200).json(posts);
   } catch (error) {
     console.error(error);
-    return errorHandler(error, req, res, () => { });
+    return errorHandler(error, req, res, () => {});
   }
 }
 
