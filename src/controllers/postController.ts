@@ -6,7 +6,7 @@ import errorHandler from '../middlewares/errorHandlerMiddleware';
 export async function createPost(req: Request, res: Response) {
   try {
     const newPost = await postService.createPost(req.body);
-    return res.json(newPost);
+    return res.status(201).json(newPost);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -21,7 +21,7 @@ export async function getPostById(req: Request, res: Response) {
     if (!post) {
       return res.status(404).json({ error: 'Post not found' });
     }
-    return res.json(post);
+    return res.status(200).json(post);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -38,7 +38,7 @@ export async function updatePost(req: Request, res: Response) {
     if (!updatedPost) {
       return res.status(404).json({ error: 'Post not found' });
     }
-    return res.json(updatedPost);
+    return res.status(200).json(updatedPost);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -55,7 +55,7 @@ export async function patchPost(req: Request, res: Response) {
     if (!patchedPost) {
       return res.status(404).json({ error: 'Post not found' });
     }
-    return res.json(patchedPost);
+    return res.status(200).json(patchedPost);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -70,7 +70,7 @@ export async function deletePost(req: Request, res: Response) {
     if (!deletedPost) {
       return res.status(404).json({ error: 'Post not found' });
     }
-    return res.json(deletedPost);
+    return res.status(204).json({ message: 'Post deleted successfully' });
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -81,7 +81,7 @@ export async function deletePost(req: Request, res: Response) {
 export async function getAllPosts(req: Request, res: Response) {
   try {
     const posts = await postService.getAllPosts();
-    return res.json(posts);
+    return res.status(200).json(posts);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -98,7 +98,7 @@ export async function getPostsByKeyword(req: Request, res: Response) {
     }
 
     const posts = await postService.getPostsByKeyword(keyword);
-    return res.json(posts);
+    return res.status(200).json(posts);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });

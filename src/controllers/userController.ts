@@ -15,7 +15,7 @@ export async function createUser(req: Request, res: Response) {
 
   try {
     const user = await userService.createUser(req.body);
-    return res.json(user);
+    return res.status(201).json(user);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -30,7 +30,7 @@ export async function getUserById(req: Request, res: Response) {
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
-    return res.json(user);
+    return res.status(200).json(user);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -50,7 +50,7 @@ export async function updateUser(req: Request, res: Response) {
       company
     );
 
-    return res.json(updatedUser);
+    return res.status(200).json(updatedUser);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -67,7 +67,7 @@ export async function patchUser(req: Request, res: Response) {
     if (!patchedUser) {
       return res.status(404).json({ error: 'User not found' });
     }
-    return res.json(patchedUser);
+    return res.status(200).json(patchedUser);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -90,7 +90,7 @@ export async function deleteUser(req: Request, res: Response) {
 export async function getAllUsers(req: Request, res: Response) {
   try {
     const users = await userService.getAllUsers();
-    return res.json(users);
+    return res.status(200).json(users);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
@@ -107,7 +107,7 @@ export async function getUsersByKeyword(req: Request, res: Response) {
     }
 
     const users = await userService.getUsersByKeyword(keyword);
-    return res.json(users);
+    return res.status(200).json(users);
   } catch (error) {
     console.error(error);
     return errorHandler(error, req, res, () => { });
