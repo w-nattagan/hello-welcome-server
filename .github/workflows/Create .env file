@@ -1,0 +1,19 @@
+name: Create .env file
+
+on: [push]
+
+jobs:
+  create-env-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create .env file
+        run: |
+          DATABASE_URL=${{ secrets.DATABASE_URL }}
+          sed -e "s|\${DATABASE_URL}|$DATABASE_URL|g" \
+              .env.template > .env
+
+      - name: Display .env file
+        run: cat .env
